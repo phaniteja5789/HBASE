@@ -1,0 +1,325 @@
+HBASE Command-version
+Command Output-2.0.0.3.0.1.0-187, re9fcf450949102de5069b257a6dee469b8f5aab3, Wed Sep 19 10:16:35 UTC 2018
+Description-Returns the version of HBASE
+
+HBASE Command-list
+Command Output-
+TABLE
+ATLAS_ENTITY_AUDIT_EVENTS
+atlas_janus
+2 row(s)
+Took 37.8471 seconds
+=> ["ATLAS_ENTITY_AUDIT_EVENTS", "atlas_janus"]
+
+Description-Returns the list of tables in HBASE
+
+HBASE Command-create 'Customer','Address','Order'
+Command Output-Created table Customer
+Took 21.0292 seconds
+=> Hbase::Table - Customer
+
+Description-Create a Table with Customer and 2 column families with name "Address","Order"
+
+HBASE Command-list
+Command Output-TABLE
+ATLAS_ENTITY_AUDIT_EVENTS
+Customer
+atlas_janus
+3 row(s)
+Took 0.1204 seconds
+=> ["ATLAS_ENTITY_AUDIT_EVENTS", "Customer", "atlas_janus"]
+
+HBASE Command-put 'Customer','virat','Address:city','Delhi'
+Command Output-record is inserted
+Description-Inserting a record with row_key='virat' in column family='Address' in column 'city' with value 'Delhi'
+
+HBASE Command-put 'Customer','Dhoni','Address:city','Jharkand'
+Command Output-record is inserted
+Description-Inserting a record with row_key='Dhoni' in column family='Address' in column 'city' with value 'Jharkand'
+
+HBASE Command-put 'Customer','Ashwin','Address:city','Chennai'
+Command Output-record is inserted
+Description-Inserting a record with row_key='Ashwin' in column family='Address' in column 'city' with value 'Chennai'
+
+
+HBASE Command-scan 'Customer'
+Command Output-
+ROW                                              COLUMN+CELL
+ Ashwin                                          column=Address:city, timestamp=1633931670356, value=Chennai
+ Dhoni                                           column=Address:city, timestamp=1633931649345, value=Jharkand
+ virat                                           column=Address:city, timestamp=1633931628316, value=Delhi
+3 row(s)
+Description-Displays the rows present in the table 'Customer' along with Column families and column names and values along with row_key
+
+HBASE Command-get 'Customer','virat','Address:city'
+Command Output-
+COLUMN                                           CELL
+ Address:city                                    timestamp=1633931628316, value=Delhi
+1 row(s)
+
+Description-Returns the value present in the table 'Customer' with row_key 'virat' in column family 'Address' in column name 'city'
+
+HBASE Command-put 'Customer','virat','Order:Number'
+Command Output- record is inserted
+Description-Inserting the row with row_key 'virat' in column family 'Order' in column 'Number'
+
+HBASE Command- get 'Customer','virat'
+Command Output-
+COLUMN                                           CELL
+ Address:city                                    timestamp=1633931628316, value=Delhi
+ Order:Number                                    timestamp=1633932411327, value=71
+1 row(s)
+
+Description-Returns the result in the table 'Customer' with row_key 'virat'
+
+HBASE Command- scan 'Customer'
+Command Output-
+ROW                                              COLUMN+CELL
+ Ashwin                                          column=Address:city, timestamp=1633931670356, value=Chennai
+ Dhoni                                           column=Address:city, timestamp=1633931649345, value=Jharkand
+ virat                                           column=Address:city, timestamp=1633931628316, value=Delhi
+ virat                                           column=Order:Number, timestamp=1633932411327, value=71
+3 row(s)
+Description-Returns the records present in the 'Customer' along with Column Family and Column with values
+
+HBASE Command-status
+Command Output-
+1 active master, 0 backup masters, 1 servers, 0 dead, 5.0000 average load
+Took 7.9199 seconds
+Description-Returns the number of region servers and hmaster present in the cluster
+
+HBASE Command-status 'detailed'
+Command Output-
+version 2.0.0.3.0.1.0-187
+0 regionsInTransition
+active master:  sandbox-hdp.hortonworks.com:16000 1633930575391
+0 backup masters
+master coprocessors: [HBaseAtlasCoprocessor]
+1 live servers
+    sandbox-hdp.hortonworks.com:16020 1633926907042
+        requestsPerSecond=0.0, numberOfOnlineRegions=5, usedHeapMB=65, maxHeapMB=1024, numberOfStores=15, numberOfStorefiles=15, storefileUncompressedSizeMB=0, storefileSizeMB=0, memstoreSizeMB=0, storefileIndexSizeKB=1, readRequestsCount=235, filteredReadRequestsCount=1, writeRequestsCount=16, rootIndexSizeKB=1, totalStaticIndexSizeKB=0, totalStaticBloomSizeKB=6, totalCompactingKVs=64, currentCompactedKVs=64, compactionProgressPct=1.0, coprocessors=[MultiRowMutationEndpoint, SecureBulkLoadEndpoint]
+        "ATLAS_ENTITY_AUDIT_EVENTS,,1543518095396.7fe8a55f553e4ac5c3bece48f8b3c47c."
+            numberOfStores=1, numberOfStorefiles=1, storefileUncompressedSizeMB=0, lastMajorCompactionTimestamp=0, storefileSizeMB=0, memstoreSizeMB=0, readRequestsCount=0, writeRequestsCount=0, rootIndexSizeKB=0, totalStaticIndexSizeKB=0, totalStaticBloomSizeKB=0, totalCompactingKVs=0, currentCompactedKVs=0, compactionProgressPct=NaN, completeSequenceId=-1, dataLocality=1.0
+        "Customer,,1633931397548.3201087a6f7768907666d27908912bed."
+            numberOfStores=2, numberOfStorefiles=2, storefileUncompressedSizeMB=0, lastMajorCompactionTimestamp=0, storefileSizeMB=0, memstoreSizeMB=0, readRequestsCount=11, writeRequestsCount=5, rootIndexSizeKB=0, totalStaticIndexSizeKB=0, totalStaticBloomSizeKB=0, totalCompactingKVs=0, currentCompactedKVs=0, compactionProgressPct=NaN, completeSequenceId=-1, dataLocality=0.0
+        "atlas_janus,,1543517997873.25782f096dc9c5a86a80e3963b7c4bb3."
+            numberOfStores=9, numberOfStorefiles=9, storefileUncompressedSizeMB=0, lastMajorCompactionTimestamp=0, storefileSizeMB=0, memstoreSizeMB=0, readRequestsCount=0, writeRequestsCount=0, rootIndexSizeKB=1, totalStaticIndexSizeKB=0, totalStaticBloomSizeKB=6, totalCompactingKVs=0, currentCompactedKVs=0, compactionProgressPct=NaN, completeSequenceId=-1, dataLocality=1.0
+        "hbase:meta,,1"
+            numberOfStores=2, numberOfStorefiles=2, storefileUncompressedSizeMB=0, lastMajorCompactionTimestamp=1633863643578, storefileSizeMB=0, memstoreSizeMB=0, readRequestsCount=216, writeRequestsCount=11, rootIndexSizeKB=0, totalStaticIndexSizeKB=0, totalStaticBloomSizeKB=0, totalCompactingKVs=64, currentCompactedKVs=64, compactionProgressPct=1.0, completeSequenceId=118, dataLocality=1.0
+        "hbase:namespace,,1543513896323.82d627f365e27a31ba312eb07dcffc1a."
+            numberOfStores=1, numberOfStorefiles=1, storefileUncompressedSizeMB=0, lastMajorCompactionTimestamp=0, storefileSizeMB=0, memstoreSizeMB=0, readRequestsCount=8, writeRequestsCount=0, rootIndexSizeKB=0, totalStaticIndexSizeKB=0, totalStaticBloomSizeKB=0, totalCompactingKVs=0, currentCompactedKVs=0, compactionProgressPct=NaN, completeSequenceId=-1, dataLocality=1.0
+0 dead servers
+Took 1.4099 seconds
+=> #<Java::JavaUtil::Collections::UnmodifiableRandomAccessList:0x53f7a906>
+hbase(main):005:0>
+
+Description-gives detailed description of the region servers and hmaster in the cluster
+
+HBASE Command-whoami
+Command Output-
+ whoami
+root (auth:SIMPLE)
+    groups: root
+Took 0.5222 seconds
+
+Description-Returns the user of HBASE
+
+HBASE Command-describe 'Customer'
+Command Output-
+Table Customer is ENABLED
+Customer
+COLUMN FAMILIES DESCRIPTION
+{NAME => 'Address', VERSIONS => '1', EVICT_BLOCKS_ON_CLOSE => 'false', NEW_VERSION_BEHAVIOR => 'false', KEEP_DELETED_CELLS => 'FALSE', CACHE_DATA_ON_WRITE => 'false', DATA_BLOCK_ENCODING =>
+ 'NONE', TTL => 'FOREVER', MIN_VERSIONS => '0', REPLICATION_SCOPE => '0', BLOOMFILTER => 'ROW', CACHE_INDEX_ON_WRITE => 'false', IN_MEMORY => 'false', CACHE_BLOOMS_ON_WRITE => 'false', PREF
+ETCH_BLOCKS_ON_OPEN => 'false', COMPRESSION => 'NONE', BLOCKCACHE => 'true', BLOCKSIZE => '65536'}
+{NAME => 'Order', VERSIONS => '1', EVICT_BLOCKS_ON_CLOSE => 'false', NEW_VERSION_BEHAVIOR => 'false', KEEP_DELETED_CELLS => 'FALSE', CACHE_DATA_ON_WRITE => 'false', DATA_BLOCK_ENCODING => '
+NONE', TTL => 'FOREVER', MIN_VERSIONS => '0', REPLICATION_SCOPE => '0', BLOOMFILTER => 'ROW', CACHE_INDEX_ON_WRITE => 'false', IN_MEMORY => 'false', CACHE_BLOOMS_ON_WRITE => 'false', PREFET
+CH_BLOCKS_ON_OPEN => 'false', COMPRESSION => 'NONE', BLOCKCACHE => 'true', BLOCKSIZE => '65536'}
+2 row(s)
+
+Description-Returns the Description of Table 'Customer' and description of the Column FAMILIES 'Address','Order'
+
+HBASE Command-is_enabled 'Customer'
+Command Output-
+true
+Took 0.0488 seconds
+=> true
+
+Description-Returns a Boolean whether a table is enabled or disabled 
+
+HBASE Command-is_disabled 'Customer'
+Command Output-
+false
+Took 0.0233 seconds
+=> 1
+Description-Since the table is enabled the is_disabled 'Customer' returns FALSE
+
+HBASE Command-disable 'Customer'
+Command Output-
+Table is Disabled
+Description-Disables the Table with Table_Name 'Customer'
+
+HBASE Command-is_enabled 'Customer'
+Command Output-
+false
+Took 0.0348 seconds
+=> false
+
+Description-Since the table is disabled with command - disable 'Customer' the command is_enabled 'Customer' returns FALSE
+
+HBASE Command -enable 'Customer'
+Command Output- 
+Table is enabled
+
+Description-Table with table_name 'Customer' is enabled.
+
+HBASE Command- is_enabled 'Customer'
+
+Command Output- the command enable 'Customer' enables the table so is_enabled 'Customer' returns the True
+
+HBASE Command-count 'Customer'
+
+Command Output-
+3 row(s)
+
+Description-Returns the number of Rows present in the table 'Customer'
+
+HBASE Command-scan 'Customer'
+Command Output-
+ROW                                              COLUMN+CELL
+ Ashwin                                          column=Address:city, timestamp=1633931670356, value=Chennai
+ Dhoni                                           column=Address:city, timestamp=1633931649345, value=Jharkand
+ virat                                           column=Address:city, timestamp=1633931628316, value=Delhi
+ virat                                           column=Order:Number, timestamp=1633932411327, value=71
+3 row(s)
+
+Description - Returns the row details present in the table 'Customer'
+
+HBASE Command-get 'Customer','virat','Address'
+
+Command Output-
+
+COLUMN                                           CELL
+ Address:city                                    timestamp=1633931628316, value=Delhi
+1 row(s)
+
+Description-Returns the value for row_key='virat' with Column Family='Address' in the table 'Customer'
+
+HBASE Command-alter 'Customer',{NAME=>'Team'}
+Command Output-
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+Description-Adds a new Column Family with name 'Team' in table 'Customer'
+
+HBASE Command-put 'Customer','virat','Team:IPL','RCB'
+
+Command Output-
+
+Row is inserted in Column Family 'Team' with name 'IPL' with value 'RCB'
+
+Description-Inserts a row in Column Family in Column Name with value.
+
+HBASE Command-get 'Customer','virat'
+
+Command Output-
+COLUMN                                           CELL
+ Address:city                                    timestamp=1633931628316, value=Delhi
+ Order:Number                                    timestamp=1633932411327, value=71
+ Team:IPL                                        timestamp=1633951563118, value=RCB
+Description-Returns the values with row_key='virat' along with their column family
+
+HBASE Command-alter 'Customer',{NAME=>'Order',METHOD=>'delete'}
+
+Command Output-
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+
+Description-Deletes the Column Family 'Order'
+
+HBASE Command-get 'Customer','virat'
+Command Output-
+
+COLUMN                                           CELL
+ Address:city                                    timestamp=1633931628316, value=Delhi
+ Team:IPL                                        timestamp=1633951563118, value=RCB
+1 row(s)
+
+Description-Returns the Column Family along with Column Name and values for row_key='virat'
+
+HBASE Command-alter 'Customer',{NAME=>'Address',VERSIONS=>'3'}
+
+Command Output-
+2.0.0.3.0.1.0-187, re9fcf450949102de5069b257a6dee469b8f5aab3, Wed Sep 19 10:16:35 UTC 2018
+Took 0.0009 seconds
+Unknown argument ignored for column family Address:
+Updating all regions with the new schema...
+1/1 regions updated.
+Done.
+Description-Changes the version for Column family to 3
+
+HBASE Command-drop 'Customer'
+
+Command Output-
+ERROR: Table Customer is enabled. Disable it first.
+
+Drop the named table. Table must first be disabled:
+
+Description-In order to drop the table 'disable' the table first then drop the table
+
+HBASE Command- delete 'Customer','Ashwin','Address:city'
+
+Command Output-
+
+Row_Key="Ashwin" is deleted from table 'Customer'
+
+Description-Deletes the specified row_key for specified Column Family
+
+HBASE Command-truncate 'Customer'
+Command Output-
+
+Truncating 'Customer' table (it may take a while):
+Disabling table...
+Truncating table...
+
+Description-Deletes the entries in the column but the table definition details will be present
+
+HBASE Command-count 'Customer'
+Command Output-
+0 row(s)
+
+Description-All the entries are removed hence the count 'Customer' returns 0.
+
+HBASE Command-disable 'Customer'
+Command Output-
+Table is disabled
+
+Description-In order to drop the table the table needs to be disabled.
+
+HBASE Command-drop 'Customer'
+Command Output-
+Deletes the table 
+
+Description-Removes the table from HBASE Master
+
+HBASE Command-scan 'Customer'
+
+Command Output-
+No Specified table is present
+
+Description-Since table is dropped there is no table defintion.Hence returns ERROR
+
+HBASE Command-list
+Command Output-
+
+TABLE
+ATLAS_ENTITY_AUDIT_EVENTS
+atlas_janus
+2 row(s)
+Took 0.6732 seconds
+
+Description-There is no table with name 'Customer' in the HBASE 
+
+
+ 
